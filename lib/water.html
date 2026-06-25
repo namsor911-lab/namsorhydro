@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ບັນທຶກລະດັບນ້ຳ</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Phetsarath OT', 'Noto Sans Lao', 'Segoe UI', sans-serif;
+    background: #0d1b2a;
+    color: #e0eaf5;
+    min-height: 100vh;
+  }
+
+  header {
+    background: linear-gradient(135deg, #0a3d6b 0%, #1565a8 60%, #0d84c8 100%);
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.4);
+  }
+
+  .header-icon {
+    width: 44px; height: 44px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+
+  header h1 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #ffffff;
+  }
+
+  header p {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.6);
+    margin-top: 2px;
+  }
+
+  .toolbar {
+    background: #132840;
+    border-bottom: 1px solid #1e3d5c;
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .toolbar label {
+    font-size: 0.8rem;
+    color: #7faac8;
+    white-space: nowrap;
+  }
+
+  .toolbar input[type="date"] {
+    background: #0d1b2a;
+    border: 1px solid #2a5070;
+    border-radius: 6px;
+    color: #c5ddf0;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .toolbar input[type="date"]:focus {
+    border-color: #0d84c8;
+    box-shadow: 0 0 0 2px rgba(13,132,200,0.2);
+  }
+
+  .btn {
+    padding: 7px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex; align-items: center; gap: 6px;
+  }
+
+  .btn-primary {
+    background: #0d84c8;
+    color: white;
+  }
+  .btn-primary:hover { background: #0a6ea8; }
+
+  .btn-success {
+    background: #16a34a;
+    color: white;
+  }
+  .btn-success:hover { background: #138040; }
+
+  .btn-danger {
+    background: #dc2626;
+    color: white;
+  }
+  .btn-danger:hover { background: #b91c1c; }
+
+  .btn-secondary {
+    background: #1e3d5c;
+    color: #c5ddf0;
+    border: 1px solid #2a5070;
+  }
+  .btn-secondary:hover { background: #244969; }
+
+  .btn-warning {
+    background: #d97706;
+    color: white;
+  }
+  .btn-warning:hover { background: #b45309; }
+
+  .spacer { flex: 1; }
+
+  .table-wrap {
+    padding: 20px 24px;
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    min-width: 900px;
+  }
+
+  thead tr th {
+    background: #0a3d6b;
+    color: #90c2e8;
+    font-weight: 700;
+    padding: 10px 8px;
+    text-align: center;
+    border: 1px solid #1e4d7a;
+    white-space: nowrap;
+    font-size: 0.78rem;
+    letter-spacing: 0.01em;
+  }
+
+  thead tr:first-child th {
+    background: #072f55;
+    font-size: 0.75rem;
+    color: #6aaed6;
+    padding: 6px 8px;
+  }
+
+  tbody tr {
+    transition: background 0.1s;
+  }
+
+  tbody tr:nth-child(even) {
+    background: rgba(255,255,255,0.02);
+  }
+
+  tbody tr:hover {
+    background: rgba(13,132,200,0.08);
+  }
+
+  tbody tr.date-row td:first-child {
+    background: #0e2f4d;
+    color: #5bbdf5;
+    font-weight: 700;
+    font-size: 0.78rem;
+  }
+
+  td {
+    border: 1px solid #1a3550;
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+    height: 36px;
+  }
+
+  td.date-cell {
+    padding: 6px 8px;
+    white-space: nowrap;
+    font-size: 0.78rem;
+    color: #5bbdf5;
+    font-weight: 700;
+    background: #0e2f4d;
+    min-width: 90px;
+  }
+
+  td.time-cell {
+    padding: 6px 8px;
+    color: #7faac8;
+    font-size: 0.8rem;
+    min-width: 60px;
+    background: #0b2236;
+  }
+
+  td input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    color: #c5ddf0;
+    text-align: center;
+    font-size: 0.82rem;
+    padding: 4px 6px;
+    outline: none;
+    font-family: inherit;
+  }
+
+  td input:focus {
+    background: rgba(13,132,200,0.15);
+    box-shadow: inset 0 0 0 2px #0d84c8;
+  }
+
+  td input::placeholder { color: #2a5070; }
+
+  td.note-cell input {
+    text-align: left;
+    color: #a0bcd0;
+  }
+
+  td.action-cell {
+    width: 36px;
+    padding: 4px;
+  }
+
+  .del-row-btn {
+    width: 26px; height: 26px;
+    background: rgba(220,38,38,0.15);
+    border: 1px solid rgba(220,38,38,0.3);
+    border-radius: 4px;
+    color: #f87171;
+    cursor: pointer;
+    font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+    margin: auto;
+  }
+
+  .del-row-btn:hover {
+    background: rgba(220,38,38,0.4);
+    border-color: #dc2626;
+  }
+
+  tfoot td {
+    background: #0a3d6b;
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #1e4d7a;
+  }
+
+  .add-time-btn {
+    background: rgba(13,132,200,0.1);
+    border: 1px dashed #1a5a80;
+    border-radius: 4px;
+    color: #4aabd6;
+    cursor: pointer;
+    font-size: 0.78rem;
+    padding: 4px 12px;
+    transition: all 0.15s;
+  }
+
+  .add-time-btn:hover {
+    background: rgba(13,132,200,0.2);
+    border-color: #0d84c8;
+    color: #7dd3f5;
+  }
+
+  .stats-bar {
+    background: #0e2237;
+    border-top: 1px solid #1a3550;
+    padding: 8px 24px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 0.75rem;
+  }
+
+  .stat-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #7faac8;
+  }
+
+  .stat-item span.val {
+    color: #5bbdf5;
+    font-weight: 700;
+    font-size: 0.82rem;
+  }
+
+  /* Modal */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: #132840;
+    border: 1px solid #1e4d7a;
+    border-radius: 12px;
+    padding: 24px;
+    width: 340px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  }
+
+  .modal h3 {
+    font-size: 1rem;
+    color: #90c2e8;
+    margin-bottom: 16px;
+  }
+
+  .form-group {
+    margin-bottom: 12px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.78rem;
+    color: #7faac8;
+    margin-bottom: 4px;
+  }
+
+  .form-group input, .form-group select {
+    width: 100%;
+    background: #0d1b2a;
+    border: 1px solid #2a5070;
+    border-radius: 6px;
+    color: #c5ddf0;
+    padding: 7px 10px;
+    font-size: 0.85rem;
+    outline: none;
+    font-family: inherit;
+  }
+
+  .form-group input:focus, .form-group select:focus {
+    border-color: #0d84c8;
+  }
+
+  .modal-btns {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    justify-content: flex-end;
+  }
+
+  .empty-msg {
+    text-align: center;
+    padding: 40px;
+    color: #3a6080;
+    font-size: 0.9rem;
+  }
+
+  .empty-msg .icon { font-size: 2.5rem; margin-bottom: 10px; }
+
+  @media print {
+    body { background: white; color: black; }
+    header { background: #0a3d6b; -webkit-print-color-adjust: exact; }
+    .toolbar, .stats-bar { display: none; }
+    td input { color: black; }
+    table { font-size: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-icon">💧</div>
+  <div>
+    <h1>ບັນທຶກລະດັບນ້ຳ ແລະ ປະລິມານນ້ຳ</h1>
+    <p>Water Level &amp; Volume Recording System</p>
+  </div>
+</header>
+
+<div class="toolbar">
+  <label>📅 ເພີ່ມວັນທີ:</label>
+  <input type="date" id="newDate">
+  <button class="btn btn-primary" onclick="addDate()">＋ ເພີ່ມວັນທີ</button>
+  <button class="btn btn-secondary" onclick="addCustomTime()">＋ ເວລາພິເສດ</button>
+  <div class="spacer"></div>
+  <button class="btn btn-warning" onclick="exportCSV()">⬇ Export CSV</button>
+  <button class="btn btn-success" onclick="saveData()">💾 ບັນທຶກ</button>
+  <button class="btn btn-danger" onclick="clearAll()">🗑 ລ້າງທັງໝົດ</button>
+</div>
+
+<div class="table-wrap">
+  <table id="mainTable">
+    <thead>
+      <tr>
+        <th rowspan="2" style="width:90px">ວ/ດ/ປ</th>
+        <th rowspan="2" style="width:60px">ເວລາ</th>
+        <th colspan="2">ລະດັບນ້ຳ (m)</th>
+        <th colspan="2">ປະລິມານນ້ຳ (Mm³)</th>
+        <th rowspan="2" style="min-width:80px">ເປີດປະຕູ<br>Weir (Cm)</th>
+        <th rowspan="2" style="min-width:80px">ປະລິມານນ້ຳ<br>ທີ່ໃຊ້ໄດ້</th>
+        <th rowspan="2" style="min-width:80px">ປະລິມານ<br>ຕ່າງກັນ</th>
+        <th rowspan="2" style="min-width:80px">ເນື້ອທີ່<br>ອ່າງ (km²)</th>
+        <th rowspan="2" style="min-width:90px">ໝາຍເຫດ</th>
+        <th rowspan="2" style="width:36px"></th>
+      </tr>
+      <tr>
+        <th>ອ່າງ Weir</th>
+        <th>Forebay</th>
+        <th>ນ້ຳໃນອ່າງ</th>
+        <th>ນ້ຳທີ່ໃຊ້</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody">
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="12">
+          <button class="add-time-btn" onclick="quickAddDate()">＋ ຄລິກເພື່ອເພີ່ມວັນທີໃໝ່</button>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+  <div id="emptyMsg" class="empty-msg">
+    <div class="icon">🌊</div>
+    <div>ຍັງບໍ່ມີຂໍ້ມູນ — ກົດ <strong>"ເພີ່ມວັນທີ"</strong> ເພື່ອເລີ່ມຕົ້ນ</div>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-item">📋 ວັນທີທັງໝົດ: <span class="val" id="statDates">0</span></div>
+  <div class="stat-item">⏱ ແຖວຂໍ້ມູນ: <span class="val" id="statRows">0</span></div>
+  <div class="stat-item">📝 ມີຂໍ້ມູນ: <span class="val" id="statFilled">0</span> ຊ່ອງ</div>
+</div>
+
+<!-- Modal for custom time -->
+<div class="modal-overlay" id="timeModal">
+  <div class="modal">
+    <h3>➕ ເພີ່ມເວລາພິເສດ</h3>
+    <div class="form-group">
+      <label>ວັນທີ</label>
+      <select id="modalDate"></select>
+    </div>
+    <div class="form-group">
+      <label>ເວລາ (HH:MM)</label>
+      <input type="time" id="modalTime" value="12:00">
+    </div>
+    <div class="modal-btns">
+      <button class="btn btn-secondary" onclick="closeModal()">ຍົກເລີກ</button>
+      <button class="btn btn-primary" onclick="confirmAddTime()">ເພີ່ມ</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ---- State ----
+let records = {}; // { "2024-01-01": [{ time, weirLevel, forebay, volume, usable, gate, diff, area, note }] }
+
+const HOURS = Array.from({length:24}, (_,i) => String(i).padStart(2,'0')+':00');
+
+function formatDate(d) {
+  // d = "2024-01-15" -> "15/01/2024"
+  const [y,m,day] = d.split('-');
+  return `${day}/${m}/${y}`;
+}
+
+function parseInputDate(str) {
+  // str from <input type=date> = "2024-01-15"
+  return str;
+}
+
+function sortedDates() {
+  return Object.keys(records).sort();
+}
+
+// ---- Add date with 24 hourly slots ----
+function addDate(dateStr) {
+  dateStr = dateStr || document.getElementById('newDate').value;
+  if (!dateStr) { alert('ກະລຸນາເລືອກວັນທີ'); return; }
+  if (records[dateStr]) { alert('ວັນທີນີ້ມີຢູ່ແລ້ວ'); return; }
+  records[dateStr] = HOURS.map(t => ({ time: t, weirLevel:'', forebay:'', volume:'', usable:'', gate:'', diff:'', area:'', note:'' }));
+  render();
+  updateStats();
+}
+
+function quickAddDate() {
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('newDate').value = today;
+  addDate(today);
+}
+
+// ---- Add custom time slot ----
+function addCustomTime() {
+  const sel = document.getElementById('modalDate');
+  sel.innerHTML = '';
+  sortedDates().forEach(d => {
+    const opt = document.createElement('option');
+    opt.value = d; opt.text = formatDate(d);
+    sel.appendChild(opt);
+  });
+  if (!sortedDates().length) { alert('ກ່ອນອື່ນໃຫ້ເພີ່ມວັນທີ'); return; }
+  document.getElementById('timeModal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('timeModal').classList.remove('open');
+}
+
+function confirmAddTime() {
+  const dateStr = document.getElementById('modalDate').value;
+  const timeStr = document.getElementById('modalTime').value;
+  if (!dateStr || !timeStr) return;
+  const exists = records[dateStr].some(r => r.time === timeStr);
+  if (exists) { alert('ເວລານີ້ມີຢູ່ແລ້ວ'); return; }
+  records[dateStr].push({ time: timeStr, weirLevel:'', forebay:'', volume:'', usable:'', gate:'', diff:'', area:'', note:'' });
+  records[dateStr].sort((a,b) => a.time.localeCompare(b.time));
+  closeModal();
+  render();
+  updateStats();
+}
+
+// ---- Delete row ----
+function deleteRow(dateStr, idx) {
+  records[dateStr].splice(idx, 1);
+  if (records[dateStr].length === 0) delete records[dateStr];
+  render();
+  updateStats();
+}
+
+// ---- Update cell value ----
+function updateCell(dateStr, idx, field, val) {
+  records[dateStr][idx][field] = val;
+  updateStats();
+}
+
+// ---- Keyboard navigation ----
+// Each input gets data-row (global row index) and data-col (field index 0-7)
+// Enter / ArrowRight → move right (wrap to next row)
+// ArrowLeft → move left (wrap to prev row)
+// ArrowUp → move up same column
+// ArrowDown → move down same column
+
+function getAllInputs() {
+  return Array.from(document.querySelectorAll('#tableBody input'));
+}
+
+function focusInput(rowIdx, colIdx) {
+  const all = getAllInputs();
+  const cols = 8; // number of editable fields
+  const target = all.find(inp =>
+    parseInt(inp.dataset.row) === rowIdx && parseInt(inp.dataset.col) === colIdx
+  );
+  if (target) { target.focus(); target.select(); return true; }
+  return false;
+}
+
+function handleNavKey(e, rowIdx, colIdx) {
+  const cols = 8;
+  const totalRows = getAllInputs().filter(i => parseInt(i.dataset.col) === 0).length;
+
+  if (e.key === 'Enter' || e.key === 'ArrowRight') {
+    e.preventDefault();
+    if (colIdx < cols - 1) {
+      focusInput(rowIdx, colIdx + 1);
+    } else {
+      // wrap to next row, first col
+      focusInput(rowIdx + 1, 0);
+    }
+  } else if (e.key === 'ArrowLeft') {
+    e.preventDefault();
+    if (colIdx > 0) {
+      focusInput(rowIdx, colIdx - 1);
+    } else {
+      // wrap to prev row, last col
+      focusInput(rowIdx - 1, cols - 1);
+    }
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    focusInput(rowIdx - 1, colIdx);
+  } else if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    focusInput(rowIdx + 1, colIdx);
+  }
+}
+
+// ---- Render table ----
+function render() {
+  const tbody = document.getElementById('tableBody');
+  const empty = document.getElementById('emptyMsg');
+  const dates = sortedDates();
+
+  if (!dates.length) {
+    tbody.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  let html = '';
+  let globalRow = 0; // global row index across all dates
+
+  dates.forEach(dateStr => {
+    const rows = records[dateStr];
+    rows.forEach((row, i) => {
+      const isFirst = i === 0;
+      const gr = globalRow; // capture for this row
+      html += `<tr>`;
+      if (isFirst) {
+        html += `<td class="date-cell" rowspan="${rows.length}">${formatDate(dateStr)}</td>`;
+      }
+      html += `<td class="time-cell">${row.time}</td>`;
+
+      const fields = ['weirLevel','forebay','volume','usable','gate','diff','area','note'];
+      fields.forEach((f, ci) => {
+        const isNote = f === 'note';
+        html += `<td class="${isNote?'note-cell':''}">
+          <input type="${isNote?'text':'number'}" step="0.01"
+            value="${row[f]}"
+            placeholder="${isNote?'...':'-'}"
+            data-row="${gr}" data-col="${ci}"
+            data-date="${dateStr}" data-idx="${i}" data-field="${f}"
+            onchange="updateCell('${dateStr}',${i},'${f}',this.value)"
+            oninput="updateCell('${dateStr}',${i},'${f}',this.value)"
+            onkeydown="handleNavKey(event,${gr},${ci})"
+          >
+        </td>`;
+      });
+
+      html += `<td class="action-cell">
+        <button class="del-row-btn" onclick="deleteRow('${dateStr}',${i})" title="ລຶບແຖວ">✕</button>
+      </td>`;
+      html += `</tr>`;
+      globalRow++;
+    });
+  });
+
+  tbody.innerHTML = html;
+}
+
+// ---- Stats ----
+function updateStats() {
+  const dates = sortedDates();
+  document.getElementById('statDates').textContent = dates.length;
+  let total = 0, filled = 0;
+  dates.forEach(d => {
+    records[d].forEach(row => {
+      const fields = ['weirLevel','forebay','volume','usable','gate','diff','area','note'];
+      fields.forEach(f => {
+        total++;
+        if (row[f] !== '' && row[f] !== null && row[f] !== undefined) filled++;
+      });
+    });
+  });
+  document.getElementById('statRows').textContent = dates.reduce((s,d)=>s+records[d].length,0);
+  document.getElementById('statFilled').textContent = filled;
+}
+
+// ---- Save / Load ----
+function saveData() {
+  localStorage.setItem('waterLevelData', JSON.stringify(records));
+  // visual feedback
+  const btn = event.target;
+  btn.textContent = '✅ ບັນທຶກສຳເລັດ';
+  setTimeout(()=> btn.textContent = '💾 ບັນທຶກ', 1500);
+}
+
+function loadData() {
+  const saved = localStorage.getItem('waterLevelData');
+  if (saved) { records = JSON.parse(saved); render(); updateStats(); }
+}
+
+// ---- Export CSV ----
+function exportCSV() {
+  const header = ['ວ/ດ/ປ','ເວລາ','ລະດັບນ້ຳ Weir','Forebay','ປະລິມານນ້ຳ','ນ້ຳທີ່ໃຊ້','ເປີດປະຕູ Weir (Cm)','ຕ່າງກັນ','ເນື້ອທີ່','ໝາຍເຫດ'];
+  const rows = [header.join(',')];
+  sortedDates().forEach(d => {
+    records[d].forEach(r => {
+      rows.push([
+        formatDate(d), r.time,
+        r.weirLevel, r.forebay, r.volume, r.usable,
+        r.gate, r.diff, r.area, `"${r.note||''}"`
+      ].join(','));
+    });
+  });
+  const blob = new Blob(['\uFEFF'+rows.join('\n')], {type:'text/csv;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'ບັນທຶກລະດັບນ້ຳ.csv';
+  a.click();
+}
+
+// ---- Clear all ----
+function clearAll() {
+  if (confirm('ທ່ານຕ້ອງການລ້າງຂໍ້ມູນທັງໝົດບໍ?')) {
+    records = {};
+    localStorage.removeItem('waterLevelData');
+    render();
+    updateStats();
+  }
+}
+
+// ---- Init ----
+loadData();
+// Set today as default date
+document.getElementById('newDate').value = new Date().toISOString().split('T')[0];
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ບັນຊີລາຍຮັບ-ລາຍຈ່າຍ — ເຂື່ອນໄຟຟ້ານ້ຳຊໍ້</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* Styles preserved from original index.html (trimmed) */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --bg: #0d1117; --bg2: #161b22; --bg3: #1c2128; --bg4: #21262d; --border: #30363d; --border2: #21262d; --txt: #e6edf3; }
+body { font-family: var(--font, sans-serif); background: var(--bg); color: var(--txt); min-height: 100vh; overflow-x: hidden; font-size: 14px; }
+/* Other CSS omitted for brevity. */
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <!-- Sidebar preserved; link to hr.html below should continue to work when loaded from webview local asset -->
+    <nav class="nav">
+      <div class="nav-sec-label">ໜ້າຫຼັກ</div>
+      <div class="nav-item" onclick="window.location.href='hr.html'">
+        ລະບົບ HR
+      </div>
+    </nav>
+  </aside>
+  <main class="main" id="main">
+    <header class="header">
+      <span class="header-title">ພາບລວມ</span>
+    </header>
+    <section class="content">
+      <div class="doc-hdr">Sample dashboard content</div>
+    </section>
+  </main>
+</div>
+<script>
+document.addEventListener('click', function(e){ if(e.target && e.target.matches('[data-open-hr]')){ window.location.href='hr.html'; } });
+</script>
+</body>
+</html>

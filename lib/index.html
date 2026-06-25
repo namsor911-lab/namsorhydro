@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ແຜນການຜະລິດໄຟຟ້າ ເຂື່ອນນ້ຳຊໍ້ 2026–2027 (Editable)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #eef2f7;
+            padding: 24px;
+        }
+        .app {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            padding: 24px 28px 32px;
+            overflow-x: auto;
+        }
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #0b2b44;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 6px;
+        }
+        h1 small {
+            font-size: 16px;
+            font-weight: 400;
+            color: #475569;
+        }
+        .subhead {
+            color: #475569;
+            font-size: 15px;
+            border-left: 4px solid #2b7a62;
+            background: #f8fafc;
+            border-radius: 0 8px 8px 0;
+            line-height: 1.6;
+            margin-bottom: 22px;
+            padding: 8px 16px;
+        }
+        .tabs {
+            display: flex;
+            gap: 6px;
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            padding: 10px 24px;
+            font-size: 15px;
+            font-weight: 600;
+            background: transparent;
+            border: none;
+            color: #64748b;
+            cursor: pointer;
+            border-radius: 10px 10px 0 0;
+            transition: 0.2s;
+        }
+        .tab-btn:hover {
+            background: #f1f5f9;
+            color: #0f172a;
+        }
+        .tab-btn.active {
+            background: #1e3a5f;
+            color: #fff;
+            box-shadow: 0 -2px 8px rgba(30, 58, 95, 0.2);
+        }
+        .tab-content {
+            display: none;
+            overflow-x: auto;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .table-wrap {
+            overflow-x: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            background: #fff;
+            margin-top: 6px;
+        }
+        table {
+            border-collapse: collapse;
+            font-size: 12.5px;
+            width: 100%;
+            min-width: 1300px;
+            background: #fff;
+        }
+        th,
+        td {
+            border: 1px solid #d0d8e0;
+            padding: 4px 5px;
+            text-align: center;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+        th {
+            background: #f1f5f9;
+            font-weight: 600;
+            color: #1e293b;
+            position: sticky;
+            top: 0;
+            z-index: 5;
+            font-size: 11.5px;
+        }
+        .header-main th {
+            background: #1e3a5f;
+            color: #fff;
+            border-color: #2c4a70;
+            font-size: 12px;
+        }
+        .row-month {
+            background: #fafbfc;
+            font-weight: 500;
+        }
+        .row-total {
+            background: #e7edf5;
+            font-weight: 700;
+            border-top: 3px solid #1e3a5f;
+        }
+        .num {
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            font-size: 12px;
+        }
+        .badge {
+            background: #1e3a5f;
+            color: #fff;
+            padding: 2px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            display: inline-block;
+        }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 14px;
+            margin: 18px 0 10px;
+        }
+        .summary-card {
+            background: #f8fafc;
+            padding: 12px 16px;
+            border-radius: 14px;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+        .summary-card .label {
+            font-size: 13px;
+            color: #475569;
+            font-weight: 500;
+        }
+        .summary-card .value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0b3b5c;
+            font-family: 'JetBrains Mono', monospace;
+            margin-top: 4px;
+        }
+        .summary-card .unit {
+            font-size: 12px;
+            color: #64748b;
+        }
+        .footer {
+            margin-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 16px;
+            font-size: 13px;
+            color: #64748b;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .footer strong {
+            color: #0f172a;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin: 8px 0 14px;
+            font-size: 13px;
+            color: #334155;
+        }
+        .legend .dot {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+            border: 1px solid #555;
+            vertical-align: middle;
+            margin-right: 4px;
+        }
+        /* FIX: legend dot-dark matches actual editable cell colour */
+        .dot-dark {
+            background: #1a1a1a;
+        }
+        .dot-green {
+            background: #e3f5ec;
+            border-color: #94a3b8;
+        }
+        .dot-gold {
+            background: #e7edf5;
+            border-color: #94a3b8;
+        }
+        /* Editable cells - dark background with white text */
+        .editable-cell {
+            background-color: #1a1a1a !important;
+            color: #ffffff !important;
+            cursor: text;
+            font-weight: 500;
+            border-color: #444;
+        }
+        .editable-cell:focus {
+            outline: 2px solid #4a9eff;
+            outline-offset: -1px;
+            background-color: #2a2a2a !important;
+        }
+        .editable-cell:hover {
+            background-color: #2d2d2d !important;
+        }
+        /* Keep non-editable cells with light background */
+        .non-editable {
+            background-color: #f8fafc;
+        }
+        .row-total td {
+            background-color: #e7edf5 !important;
+            color: #1e293b !important;
+        }
+        .row-total .editable-cell {
+            background-color: #3a3a3a !important;
+            color: #ffffff !important;
+        }
+        @media (max-width: 768px) {
+            .app {
+                padding: 12px;
+            }
+            h1 {
+                font-size: 20px;
+            }
+            .tab-btn {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            table {
+                font-size: 11px;
+                min-width: 1000px;
+            }
+            th,
+            td {
+                padding: 3px 4px;
+            }
+            .summary-card .value {
+                font-size: 17px;
+            }
+        }
+        .sub-table {
+            margin-top: 20px;
+        }
+        .sub-table table {
+            min-width: 800px;
+        }
+        .highlight-evap {
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app" id="app">
+        <h1>
+            ⚡ ແຜນການຜະລິດໄຟຟ້າ
+            <small>ເຂື່ອນໄຟຟ້ານ້ຳຊໍ້</small>
+        </h1>
+        <div class="subhead">
+            ປີ 2026 – 2027 &nbsp;·&nbsp; ສາມາດປ້ອນຂໍ້ມູນໄດ້ (ສີດຳ/ຂາວ) &nbsp;·&nbsp; ຄຳນວນອັດຕະໂນມັດ 100%
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="tab2026">📅 2026</button>
+            <button class="tab-btn" data-tab="tab2027">📅 2027</button>
+            <button class="tab-btn" data-tab="tabLookup">📊 ປະລິມານນ້ຳ</button>
+            <button class="tab-btn" data-tab="tabInflow">🌊 ນ້ຳໄຫຼເຂົ້າ</button>
+        </div>
+
+        <!-- ===================== 2026 ===================== -->
+        <div class="tab-content active" id="tab2026">
+            <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-bottom:8px;">
+                <span class="badge">ປີ 2026</span>
+                <span style="font-size:14px; color:#334155;">ຄລິກທີ່ຕາລາງສີດຳ ເພື່ອປ້ອນຂໍ້ມູນ ແລ້ວຄຳນວນອັດຕະໂນມັດ</span>
+            </div>
+            <div id="mainTable2026"></div>
+            <div id="summary2026" class="summary-grid"></div>
+            <div id="balanceTable2026" class="sub-table"></div>
+            <div class="legend">
+                <span><span class="dot dot-dark"></span> ຂໍ້ມູນປ້ອນ (ສີດຳ)</span>
+                <span><span class="dot dot-green"></span> ຄຳນວນອັດຕະໂນມັດ</span>
+                <span><span class="dot dot-gold"></span> ຜົນລວມ</span>
+            </div>
+        </div>
+
+        <!-- ===================== 2027 ===================== -->
+        <div class="tab-content" id="tab2027">
+            <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-bottom:8px;">
+                <span class="badge">ປີ 2027</span>
+                <span style="font-size:14px; color:#334155;">ຄລິກທີ່ຕາລາງສີດຳ ເພື່ອປ້ອນຂໍ້ມູນ ແລ້ວຄຳນວນອັດຕະໂນມັດ</span>
+            </div>
+            <div id="mainTable2027"></div>
+            <div id="summary2027" class="summary-grid"></div>
+            <div id="balanceTable2027" class="sub-table"></div>
+            <div class="legend">
+                <span><span class="dot dot-dark"></span> ຂໍ້ມູນປ້ອນ (ສີດຳ)</span>
+                <span><span class="dot dot-green"></span> ຄຳນວນອັດຕະໂນມັດ</span>
+                <span><span class="dot dot-gold"></span> ຜົນລວມ</span>
+            </div>
+        </div>
+
+        <!-- ===================== LOOKUP ===================== -->
+        <div class="tab-content" id="tabLookup">
+            <div style="margin-bottom:10px;"><span class="badge">ຕາຕະລາງ ລະດັບນ້ຳ ↔ ປະລິມານ</span></div>
+            <div class="table-wrap" id="lookupTable" style="max-height:500px; overflow-y:auto;"></div>
+        </div>
+
+        <!-- ===================== INFLOW ===================== -->
+        <div class="tab-content" id="tabInflow">
+            <div style="margin-bottom:10px;"><span class="badge">ນ້ຳໄຫຼເຂົ້າ ປະຈຳເດືອນ (m³/s) - ສາມາດປ້ອນໄດ້</span></div>
+            <div class="table-wrap" id="inflowTable"></div>
+        </div>
+
+        <div class="footer">
+            <span>📌 ສາມາດປ້ອນຂໍ້ມູນໃສ່ຕາລາງສີດຳ ແລ້ວຄຳນວນອັດຕະໂນມັດ</span>
+            <span><strong>ເຂື່ອນໄຟຟ້ານ້ຳຊໍ້</strong> &bull; 2026–2027</span>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        //  1.  VOLUME LOOKUP  (Piecewise linear interpolation)
+        // ============================================================
+        const VOLUME_POINTS = [
+            [513, 0],
+            [518, 27000],
+            [518.01, 27305],
+            [519.999999999998, 88000],
+            [520.009999999998, 88865],
+            [521.999999999996, 261000],
+            [522.009999999996, 262540],
+            [523.999999999995, 569000],
+            [524.009999999995, 571210],
+            [525.999999999993, 1011000],
+            [526.009999999993, 1013785],
+            [527.999999999991, 1568000],
+            [528.009999999991, 1571620],
+            [529.999999999989, 2292000],
+            [530.009999999989, 2296630],
+            [530.5, 2296630 + 4630 * 49],
+            [532, 2296630 + 4630 * 49 + 4630 * 150] // extrapolate
+        ];
+
+        // ຄວາມຈຸ active storage ສູງສຸດ (m³) — ຄຳນວນຈາກ VOLUME_POINTS ລະດັບ 530.5
+        const MAX_VOL_M3 = VOLUME_POINTS[VOLUME_POINTS.length - 2][1]; // index 530.5
+
+        function getVolume(level) {
+            if (level <= 513) return 0;
+            // FIX: ໃຊ້ last point ຈາກ array ແທນ hardcode 532
+            const lastPt = VOLUME_POINTS[VOLUME_POINTS.length - 1];
+            if (level >= lastPt[0]) return lastPt[1];
+            for (let i = 0; i < VOLUME_POINTS.length - 1; i++) {
+                const [l1, v1] = VOLUME_POINTS[i];
+                const [l2, v2] = VOLUME_POINTS[i + 1];
+                if (level >= l1 && level < l2) {
+                    const t = (level - l1) / (l2 - l1);
+                    return v1 + (v2 - v1) * t;
+                }
+            }
+            return lastPt[1];
+        }
+
+        // FIX: ຂະຫຍາຍ binary-search range ໃຫ້ຄອບ 513–532 ທັງໝົດ
+        function getLevelFromVolume(volume) {
+            if (volume <= 0) return 513;
+            const lastPt = VOLUME_POINTS[VOLUME_POINTS.length - 1];
+            if (volume >= lastPt[1]) return lastPt[0];
+            let lo = 513, hi = lastPt[0];
+            for (let i = 0; i < 80; i++) {
+                const mid = (lo + hi) / 2;
+                if (getVolume(mid) < volume) lo = mid;
+                else hi = mid;
+            }
+            return (lo + hi) / 2;
+        }
+
+        // ============================================================
+        //  2.  INFLOW DATA (editable)
+        // ============================================================
+        const inflowData = {
+            2026: { Jan: 0.3, Feb: 0.3, Mar: 0.2, Apr: 0.25, May: 0.45, Jun: 2.2, Jul: 1.69, Aug: 7, Sep: 7, Oct: 2.8, Nov: 0.22, Dec: 0.21 },
+            2027: { Jan: 0.32, Feb: 0.31, Mar: 0.22, Apr: 0.26, May: 0.47, Jun: 2.15, Jul: 1.7, Aug: 7, Sep: 7, Oct: 2.87, Nov: 0.25, Dec: 0.22 }
+        };
+
+        // ============================================================
+        //  3.  USER INPUTS STORE
+        // ============================================================
+        let userInputs = {};
+
+        // ============================================================
+        //  4.  DAYS PER MONTH — FIX: ຮອງຮັບ leap year
+        // ============================================================
+        const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        function getDaysInMonth(year, monthIndex) {
+            // monthIndex 0=Jan … 11=Dec
+            return new Date(year, monthIndex + 1, 0).getDate();
+        }
+
+        // ============================================================
+        //  5.  GET UNIT CONFIG
+        // ============================================================
+        function getUnitConfig(year, month, userOverrides) {
+            const cfg = { u1mw: 0, u1h: 0, u1d: 0, u2mw: 0, u2h: 0, u2d: 0, price: 6.76 };
+
+            if (year === 2026) {
+                switch (month) {
+                    case 'Jan': cfg.u2mw=1.2; cfg.u2h=8; cfg.u2d=25; break;
+                    case 'Feb': cfg.u1mw=1.2; cfg.u1h=8; cfg.u1d=25; break;
+                    case 'Mar': cfg.u2mw=1.2; cfg.u2h=8; cfg.u2d=24; break;
+                    case 'Apr': cfg.u1mw=1.2; cfg.u1h=8; cfg.u1d=25; break;
+                    case 'May': cfg.u2mw=1.2; cfg.u2h=16; cfg.u2d=28; break;
+                    case 'Jun': cfg.u1mw=2; cfg.u1h=16; cfg.u1d=27; cfg.u2mw=2; cfg.u2h=16; cfg.u2d=27; break;
+                    case 'Jul': cfg.u1mw=2.5; cfg.u1h=24; cfg.u1d=26; cfg.u2mw=2.5; cfg.u2h=24; cfg.u2d=26; break;
+                    case 'Aug': cfg.u1mw=2.7; cfg.u1h=24; cfg.u1d=26; cfg.u2mw=2.7; cfg.u2h=24; cfg.u2d=26; break;
+                    case 'Sep': cfg.u1mw=2.7; cfg.u1h=24; cfg.u1d=26; cfg.u2mw=2.7; cfg.u2h=24; cfg.u2d=26; break;
+                    case 'Oct': cfg.u1mw=2; cfg.u1h=24; cfg.u1d=25; cfg.u2mw=2; cfg.u2h=24; cfg.u2d=25; break;
+                    case 'Nov': cfg.u1mw=1.2; cfg.u1h=8; cfg.u1d=22; break;
+                    case 'Dec': cfg.u2mw=1.2; cfg.u2h=8; cfg.u2d=20; break;
+                }
+            } else { // 2027
+                switch (month) {
+                    case 'Jan': cfg.u1mw=1.2; cfg.u1h=8; cfg.u1d=27; cfg.u2mw=1.2; cfg.u2h=8; cfg.u2d=27; cfg.price=6.72; break;
+                    case 'Feb': cfg.u1mw=1.2; cfg.u1h=8; cfg.u1d=25; cfg.u2mw=1.2; cfg.u2h=8; cfg.u2d=25; break;
+                    case 'Mar': cfg.u1mw=1.2; cfg.u1h=8; cfg.u1d=25; cfg.u2mw=1.2; cfg.u2h=8; cfg.u2d=24; break;
+                    case 'Apr': cfg.u1mw=1.2; cfg.u1h=8; cfg.u1d=25; cfg.u2mw=1.2; cfg.u2h=8; cfg.u2d=25; break;
+                    case 'May': cfg.u1mw=1.2; cfg.u1h=8; cfg.u1d=25; cfg.u2mw=1.2; cfg.u2h=16; cfg.u2d=25; break;
+                    case 'Jun': cfg.u1mw=2.5; cfg.u1h=16; cfg.u1d=26; cfg.u2mw=2; cfg.u2h=16; cfg.u2d=26; break;
+                    case 'Jul': cfg.u1mw=2; cfg.u1h=24; cfg.u1d=26; cfg.u2mw=2; cfg.u2h=24; cfg.u2d=26; break;
+                    case 'Aug': cfg.u1mw=2.7; cfg.u1h=24; cfg.u1d=25; cfg.u2mw=2.7; cfg.u2h=24; cfg.u2d=25; break;
+                    case 'Sep': cfg.u1mw=2.7; cfg.u1h=24; cfg.u1d=25; cfg.u2mw=2.7; cfg.u2h=24; cfg.u2d=25; break;
+                    case 'Oct': cfg.u1mw=2; cfg.u1h=24; cfg.u1d=24; cfg.u2mw=2; cfg.u2h=24; cfg.u2d=24; break;
+                    case 'Nov': cfg.u1mw=2; cfg.u1h=8; cfg.u1d=22; cfg.u2mw=1.5; cfg.u2h=18; cfg.u2d=26; break;
+                    case 'Dec': cfg.u1mw=2; cfg.u1h=16; cfg.u1d=18; cfg.u2mw=1.2; cfg.u2h=8; cfg.u2d=25; break;
+                }
+            }
+
+            // Apply user overrides
+            const key = year + '-' + month;
+            if (userOverrides) {
+                if (userOverrides[key + '-u1mw'] !== undefined) cfg.u1mw = parseFloat(userOverrides[key + '-u1mw']) || 0;
+                if (userOverrides[key + '-u1h']  !== undefined) cfg.u1h  = parseFloat(userOverrides[key + '-u1h'])  || 0;
+                if (userOverrides[key + '-u1d']  !== undefined) cfg.u1d  = parseFloat(userOverrides[key + '-u1d'])  || 0;
+                if (userOverrides[key + '-u2mw'] !== undefined) cfg.u2mw = parseFloat(userOverrides[key + '-u2mw']) || 0;
+                if (userOverrides[key + '-u2h']  !== undefined) cfg.u2h  = parseFloat(userOverrides[key + '-u2h'])  || 0;
+                if (userOverrides[key + '-u2d']  !== undefined) cfg.u2d  = parseFloat(userOverrides[key + '-u2d'])  || 0;
+                if (userOverrides[key + '-price'] !== undefined) cfg.price = parseFloat(userOverrides[key + '-price']) || 6.76;
+            }
+            return cfg;
+        }
+
+        // ============================================================
+        //  6.  CALCULATE YEAR
+        // ============================================================
+        function calcYear(year, overrides) {
+            const startLevel = (year === 2026) ? 528.0 : 527.78;
+            let prevLevel = startLevel;
+            let prevVol   = getVolume(prevLevel);
+            const results = [];
+
+            for (let i = 0; i < 12; i++) {
+                const m    = MONTHS[i];
+                // FIX: ໃຊ້ getDaysInMonth ແທນ DAYS array — ຮອງຮັບ leap year
+                const days = getDaysInMonth(year, i);
+                const inflow_m3s = (overrides && overrides[year + '-' + m + '-inflow'] !== undefined)
+                    ? (parseFloat(overrides[year + '-' + m + '-inflow']) || 0)
+                    : inflowData[year][m];
+                const inflowVol = inflow_m3s * 3600 * 24 * days;
+                const cfg = getUnitConfig(year, m, overrides);
+
+                const u1q   = (cfg.u1mw * 2.52) / 2.7;
+                const u2q   = (cfg.u2mw * 2.52) / 2.7;
+                const u1vol = u1q * 3600 * cfg.u1h * cfg.u1d;
+                const u2vol = u2q * 3600 * cfg.u2h * cfg.u2d;
+                const outflow = u1vol + u2vol;
+
+                // FIX: spillway ຄຳນວນຈາກ volume ລວມທີ່ເກີນຄວາມຈຸ ບໍ່ແມ່ນ inflow ຢ່າງດຽວ
+                let spillway = 0;
+                if (m === 'Aug' || m === 'Sep') {
+                    const volAfterBalance = prevVol + inflowVol - outflow;
+                    spillway = Math.max(0, volAfterBalance - MAX_VOL_M3);
+                }
+
+                const energyMWh = (cfg.u1mw * cfg.u1h * cfg.u1d) + (cfg.u2mw * cfg.u2h * cfg.u2d);
+                const energyKWh = energyMWh * 1000;
+                const income    = energyKWh * (cfg.price / 100);
+
+                const volEnd   = prevVol + inflowVol - outflow - spillway;
+                const levelEnd = getLevelFromVolume(volEnd);
+
+                results.push({
+                    month: m, days,
+                    levelStart: prevLevel, volStart: prevVol,
+                    inflow_m3s, inflowVol, cfg,
+                    u1q, u1vol, u2q, u2vol,
+                    outflow, spillway,
+                    energyMWh, energyKWh, income,
+                    volEnd, levelEnd,
+                    price: cfg.price
+                });
+
+                prevLevel = levelEnd;
+                prevVol   = volEnd;
+            }
+            return results;
+        }
+
+        // ============================================================
+        //  7.  ATTACH EDITABLE EVENTS — helper to avoid listener leak
+        // ============================================================
+        function attachEditEvents(container, skipInflowRefresh) {
+            // FIX: scoped to container — ບໍ່ query ທົ່ວ document ອີກຕໍ່ໄປ
+            container.querySelectorAll('.editable-cell').forEach(cell => {
+                cell.addEventListener('blur', function() {
+                    const key = this.dataset.key;
+                    const val = this.innerText.trim();
+                    if (key) {
+                        userInputs[key] = val;
+                        renderAll(skipInflowRefresh);
+                    }
+                });
+                cell.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') { e.preventDefault(); this.blur(); }
+                });
+                cell.addEventListener('input', function() {
+                    // ອະນຸຍາດສະເພາະຕົວເລກ ແລະ ຈຸດທົດສານ
+                    const pos = this.innerText.length;
+                    this.innerText = this.innerText.replace(/[^0-9.]/g, '');
+                    // Restore cursor to end
+                    const sel = window.getSelection();
+                    const range = document.createRange();
+                    if (this.childNodes[0]) {
+                        range.setStart(this.childNodes[0], Math.min(pos, this.innerText.length));
+                        range.collapse(true);
+                        sel.removeAllRanges();
+                        sel.addRange(range);
+                    }
+                });
+            });
+        }
+
+        // ============================================================
+        //  8.  RENDER MAIN TABLE (Editable)
+        // ============================================================
+        function renderMainTable(year, containerId) {
+            const data      = calcYear(year, userInputs);
+            const container = document.getElementById(containerId);
+
+            let html = `<div class="table-wrap"><table>
+                <thead>
+                    <tr class="header-main">
+                        <th rowspan="2">Month</th>
+                        <th rowspan="2">Water Level<br>(masl)</th>
+                        <th rowspan="2">Volume<br>(m³)</th>
+                        <th rowspan="2">Inflow<br>(m³/s)</th>
+                        <th rowspan="2">Inflow<br>(m³)</th>
+                        <th colspan="3">Unit 1</th>
+                        <th colspan="3">Unit 2</th>
+                        <th rowspan="2">Outflow<br>(m³)</th>
+                        <th rowspan="2">Spillway<br>(m³)</th>
+                        <th rowspan="2">Energy<br>(MWh)</th>
+                        <th rowspan="2">Energy<br>(kWh)</th>
+                        <th rowspan="2">Income<br>(USD)</th>
+                    </tr>
+                    <tr class="header-main">
+                        <th>MW</th><th>Q (m³/s)</th><th>Vol (m³)</th>
+                        <th>MW</th><th>Q (m³/s)</th><th>Vol (m³)</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+
+            let tInflow=0, tOutflow=0, tSpill=0, tEnergy=0, tIncome=0;
+
+            for (let i = 0; i < data.length; i++) {
+                const d   = data[i];
+                const cls = (i % 2 === 0) ? 'row-month' : '';
+                const key = year + '-' + d.month;
+                html += `<tr class="${cls}">
+                    <td><strong>${d.month}</strong></td>
+                    <td>${d.levelStart.toFixed(2)}</td>
+                    <td>${Math.round(d.volStart).toLocaleString()}</td>
+                    <td class="editable-cell" contenteditable="true" data-key="${key}-inflow">${d.inflow_m3s.toFixed(2)}</td>
+                    <td>${Math.round(d.inflowVol).toLocaleString()}</td>
+                    <td class="editable-cell" contenteditable="true" data-key="${key}-u1mw">${d.cfg.u1mw.toFixed(1)}</td>
+                    <td>${d.u1q.toFixed(3)}</td>
+                    <td>${Math.round(d.u1vol).toLocaleString()}</td>
+                    <td class="editable-cell" contenteditable="true" data-key="${key}-u2mw">${d.cfg.u2mw.toFixed(1)}</td>
+                    <td>${d.u2q.toFixed(3)}</td>
+                    <td>${Math.round(d.u2vol).toLocaleString()}</td>
+                    <td>${Math.round(d.outflow).toLocaleString()}</td>
+                    <td>${d.spillway > 0 ? Math.round(d.spillway).toLocaleString() : '-'}</td>
+                    <td>${d.energyMWh.toFixed(1)}</td>
+                    <td>${Math.round(d.energyKWh).toLocaleString()}</td>
+                    <td>${d.income.toFixed(2)}</td>
+                </tr>`;
+                tInflow  += d.inflowVol;
+                tOutflow += d.outflow;
+                tSpill   += d.spillway;
+                tEnergy  += d.energyMWh;
+                tIncome  += d.income;
+            }
+
+            html += `<tr class="row-total">
+                <td><strong>Total</strong></td>
+                <td></td><td></td><td></td>
+                <td>${Math.round(tInflow).toLocaleString()}</td>
+                <td></td><td></td><td></td>
+                <td></td><td></td><td></td>
+                <td>${Math.round(tOutflow).toLocaleString()}</td>
+                <td>${Math.round(tSpill).toLocaleString()}</td>
+                <td>${tEnergy.toFixed(1)}</td>
+                <td>${Math.round(tEnergy*1000).toLocaleString()}</td>
+                <td>${tIncome.toFixed(2)}</td>
+            </tr>`;
+            html += '</tbody></table></div>';
+            container.innerHTML = html;
+
+            // FIX: scoped attachEditEvents — ໄດ່ເກີດ listener ຊ້ຳ
+            attachEditEvents(container, false);
+
+            // Summary cards
+            const last = data[data.length - 1];
+            // FIX: ອັດຕາ = average price ທຸກເດືອນ ແທນ data[0].price
+            const avgPrice = data.reduce((s, d) => s + d.price, 0) / data.length;
+            document.getElementById('summary' + year).innerHTML = `
+                <div class="summary-card"><div class="label">ພະລັງງານທັງໝົດ</div><div class="value">${(tEnergy/1000).toFixed(2)}</div><div class="unit">GWh</div></div>
+                <div class="summary-card"><div class="label">ລາຍຮັບທັງໝົດ</div><div class="value">${tIncome.toFixed(2)}</div><div class="unit">USD</div></div>
+                <div class="summary-card"><div class="label">ນ້ຳໄຫຼເຂົ້າລວມ</div><div class="value">${(tInflow/1e6).toFixed(2)}</div><div class="unit">MCM</div></div>
+                <div class="summary-card"><div class="label">ລະດັບນ້ຳສິ້ນປີ</div><div class="value">${last.levelEnd.toFixed(2)}</div><div class="unit">masl</div></div>
+                <div class="summary-card"><div class="label">ອັດຕາສະເລ່ຍ</div><div class="value" style="font-size:18px;">${avgPrice.toFixed(2)}</div><div class="unit">USD/100kWh</div></div>
+            `;
+
+            renderBalanceTable(year, data);
+        }
+
+        // ============================================================
+        //  9.  RENDER BALANCE TABLE
+        // ============================================================
+        function renderBalanceTable(year, data) {
+            const container = document.getElementById('balanceTable' + year);
+            // FIX: totalCapMCM ຄຳນວນຈາກ VOLUME_POINTS ລະດັບ 530.5 — ຕົວເລກຖືກຕ້ອງ
+            const totalCapMCM = MAX_VOL_M3 / 1e6;
+
+            let html = `<div style="margin-top:20px;font-weight:600;font-size:15px;color:#1e3a5f;">
+                ຕາຕະລາງດຸ່ນດ່ຽງນ້ຳ ແລະ ການຜະລິດ (MCM / GWh)
+                <span style="font-weight:400;font-size:13px;color:#64748b;margin-left:8px;">ຄວາມຈຸ Active = ${totalCapMCM.toFixed(3)} MCM</span>
+            </div>
+            <div class="table-wrap"><table>
+                <thead>
+                    <tr class="header-main">
+                        <th>Month</th>
+                        <th>Level Start<br>(masl)</th>
+                        <th>Active Vol.<br>(MCM)</th>
+                        <th>(%)</th>
+                        <th>Inflow<br>(MCM)</th>
+                        <th>Discharge<br>(MCM)</th>
+                        <th>Spillway<br>(MCM)</th>
+                        <th>Evap.<br>(MCM)</th>
+                        <th>Vol. End<br>(MCM)</th>
+                        <th>(%)</th>
+                        <th>Level End<br>(masl)</th>
+                        <th>Prod.<br>(GWh)</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+
+            let tInflowMCM=0, tDischargeMCM=0, tSpillMCM=0, tProdGWh=0;
+
+            for (let i = 0; i < data.length; i++) {
+                const d            = data[i];
+                const volStartMCM  = d.volStart  / 1e6;
+                const volEndMCM    = d.volEnd    / 1e6;
+                const inflowMCM    = d.inflowVol / 1e6;
+                const dischargeMCM = d.outflow   / 1e6;
+                const spillMCM     = d.spillway  / 1e6;
+                const prodGWh      = d.energyMWh / 1000;
+                const pctStart     = (volStartMCM / totalCapMCM) * 100;
+                const pctEnd       = (volEndMCM   / totalCapMCM) * 100;
+
+                html += `<tr class="${i%2===0?'row-month':''}">
+                    <td><strong>${d.month}</strong></td>
+                    <td>${d.levelStart.toFixed(2)}</td>
+                    <td>${volStartMCM.toFixed(3)}</td>
+                    <td>${pctStart.toFixed(1)}</td>
+                    <td>${inflowMCM.toFixed(3)}</td>
+                    <td>${dischargeMCM.toFixed(3)}</td>
+                    <td>${d.spillway > 0 ? spillMCM.toFixed(3) : '-'}</td>
+                    <td class="highlight-evap">-</td>
+                    <td>${volEndMCM.toFixed(3)}</td>
+                    <td>${pctEnd.toFixed(1)}</td>
+                    <td>${d.levelEnd.toFixed(2)}</td>
+                    <td>${prodGWh.toFixed(3)}</td>
+                </tr>`;
+                tInflowMCM    += inflowMCM;
+                tDischargeMCM += dischargeMCM;
+                tSpillMCM     += spillMCM;
+                tProdGWh      += prodGWh;
+            }
+
+            html += `<tr class="row-total">
+                <td><strong>Total</strong></td>
+                <td></td><td></td><td></td>
+                <td>${tInflowMCM.toFixed(3)}</td>
+                <td>${tDischargeMCM.toFixed(3)}</td>
+                <td>${tSpillMCM.toFixed(3)}</td>
+                <td></td><td></td><td></td><td></td>
+                <td>${tProdGWh.toFixed(3)}</td>
+            </tr>`;
+            html += '</tbody></table></div>';
+            container.innerHTML = html;
+        }
+
+        // ============================================================
+        //  10. RENDER LOOKUP TABLE
+        // ============================================================
+        function renderLookup() {
+            const container = document.getElementById('lookupTable');
+            let html = `<table><thead><tr>
+                <th>ລະດັບນ້ຳ (masl)</th>
+                <th>ປະລິມານ (m³)</th>
+                <th>ປະລິມານ (MCM)</th>
+            </tr></thead><tbody>`;
+            for (let lv = 518; lv <= 530; lv += 0.2) {
+                const v = getVolume(Math.round(lv * 100) / 100);
+                html += `<tr><td>${lv.toFixed(1)}</td><td>${Math.round(v).toLocaleString()}</td><td>${(v/1e6).toFixed(3)}</td></tr>`;
+            }
+            html += `<tr><td>530.5</td><td>${Math.round(getVolume(530.5)).toLocaleString()}</td><td>${(getVolume(530.5)/1e6).toFixed(3)}</td></tr>`;
+            html += `<tr><td>532.0</td><td>${Math.round(getVolume(532)).toLocaleString()}</td><td>${(getVolume(532)/1e6).toFixed(3)}</td></tr>`;
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+
+        // ============================================================
+        //  11. RENDER INFLOW TABLE (Editable)
+        //      FIX: skipInflowRefresh — ປ້ອງກັນ cursor ຫາຍເວລາພິມ
+        // ============================================================
+        function renderInflow() {
+            const container = document.getElementById('inflowTable');
+            let html = `<table><thead><tr>
+                <th>Month</th><th>2026 (m³/s)</th><th>2027 (m³/s)</th>
+            </tr></thead><tbody>`;
+            for (const m of MONTHS) {
+                const val26 = userInputs['2026-' + m + '-inflow'] !== undefined
+                    ? parseFloat(userInputs['2026-' + m + '-inflow']) || 0
+                    : inflowData[2026][m];
+                const val27 = userInputs['2027-' + m + '-inflow'] !== undefined
+                    ? parseFloat(userInputs['2027-' + m + '-inflow']) || 0
+                    : inflowData[2027][m];
+                html += `<tr>
+                    <td><strong>${m}</strong></td>
+                    <td class="editable-cell" contenteditable="true" data-key="2026-${m}-inflow">${val26.toFixed(2)}</td>
+                    <td class="editable-cell" contenteditable="true" data-key="2027-${m}-inflow">${val27.toFixed(2)}</td>
+                </tr>`;
+            }
+            html += '</tbody></table>';
+            container.innerHTML = html;
+
+            // FIX: ຕອນ user ແກ້ inflow table → renderAll(true) = skip re-render inflow
+            attachEditEvents(document.getElementById('inflowTable'), true);
+        }
+
+        // ============================================================
+        //  12. RENDER ALL
+        //      FIX: skipInflow parameter ປ້ອງກັນ cursor ຫາຍໃນ inflow tab
+        // ============================================================
+        function renderAll(skipInflow) {
+            renderMainTable(2026, 'mainTable2026');
+            renderMainTable(2027, 'mainTable2027');
+            if (!skipInflow) renderInflow();
+        }
+
+        // ============================================================
+        //  13. TAB SWITCHING
+        // ============================================================
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+                const target = document.getElementById(this.dataset.tab);
+                if (target) target.classList.add('active');
+            });
+        });
+
+        // ============================================================
+        //  14. INIT
+        // ============================================================
+        renderAll(false);
+        renderLookup();
+    </script>
+
+</body>
+</html>
